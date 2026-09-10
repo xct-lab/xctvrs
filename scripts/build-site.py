@@ -1,5 +1,6 @@
 from pathlib import Path
 from html import escape
+from survey import questionnaire
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT.parent/'dist'
 OUT.mkdir(exist_ok=True)
@@ -9,6 +10,9 @@ def links(path):
 def card(k,title,text,url=None,label='Explore'):
  return f'<article class="card"><p class="eyebrow">{k}</p><h2>{title}</h2><p>{text}</p>'+ (f'<a class="text-link" href="{url}">{label} <span aria-hidden="true">↗</span></a>' if url else '')+'</article>'
 def page(path,title,eyebrow,heading,intro,body):
+ if path == '/petition/':
+  body = body.replace('<a class="button" href="#statement">', '<a class="button secondary" href="#platform-questions">Explore platform questions</a><a class="button" href="#statement">', 1)
+  body += questionnaire()
  canonical='https://xctvrs.ca'+path
  h=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>{escape(title)} | XCTVRS</title><meta name="description" content="{escape(intro,quote=True)}"><link rel="canonical" href="{canonical}"><link rel="stylesheet" href="/assets/site.css"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="header-top"><a class="brand" href="/">XCT<span>VRS</span><small>Independent advocacy · Canada</small></a><span class="header-note">Clear evidence. Better communication.</span></div><nav class="desktop-nav" aria-label="Main navigation">{links(path)}</nav><details class="mobile-nav"><summary>Menu</summary><nav aria-label="Mobile navigation">{links(path)}</nav></details></header><main id="main"><section class="page-hero"><p class="eyebrow">{eyebrow}</p><h1>{heading}</h1><p class="lead">{intro}</p></section>{body}</main><footer><div><a class="brand" href="/">XCT<span>VRS</span></a><p>Independent Canada VRS advocacy.<br>Not affiliated with CAV, Canada VRS, or the CRTC.</p></div><div class="footer-links"><a href="/about/">About this project</a><a href="/petition/">Petition draft</a><a href="/contact/">Participation status</a><a href="https://dun360.com/">DUN360 · Public voice</a><a href="https://xct.guru/">XCT.Guru · Technology</a></div></footer></body></html>'''
  dest=OUT/('index.html' if path=='/' else path.strip('/')+'/index.html')
@@ -41,7 +45,7 @@ page('/about/','About XCTVRS','Independent by design','VRS advocacy.<br><span>On
 page('/contact/','Participation status','Contact and participation','A clear route<br><span>before collecting information.</span>','Public submissions, account registration, and petition signing are not open on this site yet.',
 '<section class="section prose"><h2>What you can do now</h2><p>Read the issue overview, review the petition draft, and explore the official resources. An approved contact or participation process will be explained here before personal information is collected.</p><div class="hero-actions"><a class="button" href="/petition/">Read the draft</a><a class="button secondary" href="/resources/">Explore resources</a></div></section>')
 (OUT/'404.html').write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | XCTVRS</title><link rel="stylesheet" href="/assets/site.css"><main><h1>Page not found</h1><p>This address does not have a published page.</p><a class="button" href="/">Return to XCTVRS</a></main></html>')
-print('Built 11 XCTVRS pages and a 404 page; no records, forms, accounts, or signature counts included.')
+print('Built 11 XCTVRS pages and a 404 page; no records, accounts, signature counts, or response collection included.')
 
 from localize import localize
 localize(OUT, ROOT)
