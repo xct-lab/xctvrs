@@ -32,3 +32,23 @@ body{position:relative;isolation:isolate}body::before{content:"";position:fixed;
 }
 @media(min-width:1001px){.card-animation-layer:nth-child(odd){transform-origin:25vw 100%}.card-animation-layer:nth-child(even){transform-origin:-25vw 100%}}
 @media(prefers-reduced-motion:reduce){.card-animation-layer{animation:none!important;transform:none!important}}
+/* Compact question cards: four across on desktop beside the chapter menu. */
+body[data-page=petition] .site-header,body[data-page=petition] main,body[data-page=petition] footer{max-width:1800px}
+body[data-page=petition] main{grid-template-columns:150px minmax(0,1fr);column-gap:28px}
+.question-grid{gap:20px 14px;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.card-animation-layer{align-self:stretch;display:flex}.card-animation-layer>.star-card{width:100%;height:100%;display:flex;flex-direction:column;border-radius:12px}
+.question-header{padding:11px 13px;gap:8px}.question-header .question-number{min-width:30px;font-size:12px;padding:5px 7px}.video-help-button{padding:8px 10px;min-height:44px;font-size:11px}
+.question-title{padding:15px 14px 0;font-size:17px;line-height:1.45}.rating-fields{padding:0 13px 15px;margin-top:auto}
+.star-rating{gap:0;margin:12px 0 6px}.star-choice{min-height:60px;padding:8px 0;gap:5px}.star-icon{width:27px;height:27px}.star-value{font-size:11px}
+.rating-endpoints{gap:8px;font-size:11px}.rating-feedback{min-height:46px;padding:9px;margin:12px 0;font-size:12px}.rating-na{font-size:11px;min-height:48px;padding-top:10px}
+@media(min-width:1280px){
+ body[data-page=petition] .site-header,body[data-page=petition] main,body[data-page=petition] footer{padding-inline:32px}
+ body[data-page=petition] main{grid-template-columns:140px minmax(0,1fr);column-gap:24px}
+ .question-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .question-title{font-size:16px;min-height:116px}
+ .card-animation-layer:nth-child(4n + 1),.card-animation-layer:nth-child(4n + 2){transform-origin:100% 100%;--side:-1}
+ .card-animation-layer:nth-child(4n + 3),.card-animation-layer:nth-child(4n){transform-origin:0% 100%;--side:1}
+}
+@media(min-width:701px) and (max-width:1279px){.card-animation-layer:nth-child(odd){transform-origin:100% 100%;--side:-1}.card-animation-layer:nth-child(even){transform-origin:0% 100%;--side:1}}
+@media(max-width:850px){body[data-page=petition] main{column-gap:18px;grid-template-columns:120px minmax(0,1fr)}.question-grid{grid-template-columns:1fr}}
+@media(max-width:700px){body[data-page=petition] main{display:block}.question-grid{grid-template-columns:1fr;gap:18px}.question-title{font-size:18px}.star-icon{width:32px;height:32px}.question-header{padding:12px 17px}.rating-fields{padding:0 17px 18px}.question-title{padding-inline:18px}.card-animation-layer{transform-origin:50% 100%}}
