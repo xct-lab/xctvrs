@@ -43,5 +43,8 @@ page('/contact/','Participation status','Contact and participation','A clear rou
 (OUT/'404.html').write_text('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | XCTVRS</title><link rel="stylesheet" href="/assets/site.css"><main><h1>Page not found</h1><p>This address does not have a published page.</p><a class="button" href="/">Return to XCTVRS</a></main></html>')
 print('Built 11 XCTVRS pages and a 404 page; no records, forms, accounts, or signature counts included.')
 
+from localize import localize
+localize(OUT, ROOT)
+
 import shutil
 shutil.copytree(ROOT.parent / "assets", OUT / "assets", dirs_exist_ok=True)
