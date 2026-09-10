@@ -90,3 +90,18 @@ html[data-theme=dark] .button:not(.secondary),html[data-theme=dark] .question-nu
 html[data-theme=dark] .star-choice:has(input:checked) .star-icon,html[data-theme=dark] .star-choice:has(~ .star-choice input:checked) .star-icon{background:#cc7052}
 html[data-theme=dark] .rating-na input{accent-color:#af553d}
 html[data-theme=dark] .card-animation-layer>.star-card:is(:hover,:focus-within,:has(input:checked)){background:#9c4936;border-color:#b45d45;box-shadow:5px 12px 20px #8c3b251c}
+/* Fan-inspired question cards: keep every question visible and interactive. */
+@media(min-width:851px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .question-grid .card-surface{transform-origin:50% 100%;transform:rotate(var(--fan-angle,0deg));transition:transform 200ms ease-out}
+ .question-grid .card-animation-layer:nth-child(odd){--fan-angle:-2deg}
+ .question-grid .card-animation-layer:nth-child(even){--fan-angle:2deg}
+ .question-grid:has(.star-card:hover) .card-surface,
+ .question-grid:focus-within .card-surface{transform:rotate(0deg)}
+ .question-grid .star-card:hover .card-surface,
+ .question-grid .star-card:focus-within .card-surface{transform:translateY(-8px) rotate(0deg)}
+}
+@media(min-width:1150px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .question-grid .card-animation-layer:nth-child(3n + 1){--fan-angle:-2deg}
+ .question-grid .card-animation-layer:nth-child(3n + 2){--fan-angle:0deg}
+ .question-grid .card-animation-layer:nth-child(3n){--fan-angle:2deg}
+}
