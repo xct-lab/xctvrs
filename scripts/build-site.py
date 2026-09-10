@@ -4,7 +4,7 @@ from survey import questionnaire
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT.parent/'dist'
 OUT.mkdir(exist_ok=True)
-NAV=[('Home','/'),('VRS Issues','/issues/'),('Petition','/petition/'),('Community','/community/'),('CRTC','/crtc/'),('CAV','/cav/'),('Evidence','/evidence/'),('Resources','/resources/'),('Updates','/updates/'),('About','/about/')]
+NAV=[('Home','/'),('VRS Issues','/issues/'),('Petition','/petition/'),('Interpreters','/interpreters/'),('Community','/community/'),('CRTC','/crtc/'),('CAV','/cav/'),('Evidence','/evidence/'),('Resources','/resources/'),('Updates','/updates/'),('About','/about/')]
 def links(path):
  return ''.join(f'<a href="{url}"'+(' aria-current="page"' if url==path else '')+f'>{label}</a>' for label,url in NAV)
 def card(k,title,text,url=None,label='Explore'):
