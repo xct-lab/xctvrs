@@ -53,6 +53,8 @@ export default {
     }
     const headers = new Headers(response.headers);
     headers.set('Content-Language', language === 'fr' ? 'fr-CA' : 'en-CA');
+    // Revalidate pages so they pick up the stylesheet URL from the latest build.
+    if (response.status === 200) headers.set('Cache-Control', 'no-cache');
     return new Response(request.method === 'HEAD' ? null : response.body, { status: response.status, headers });
   },
 };
