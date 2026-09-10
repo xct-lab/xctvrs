@@ -27,6 +27,8 @@ jobs:
         run: |
           test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::Add CLOUDFLARE_ACCOUNT_ID in repository Actions secrets."; exit 1; }
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::Add CLOUDFLARE_API_TOKEN in repository Actions secrets."; exit 1; }
+      - name: Test language routing
+        run: node --test scripts/tests/language-worker.test.mjs
       - name: Build approved public website
         run: python3 scripts/build-site.py
       - name: Deploy existing Pages project
