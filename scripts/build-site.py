@@ -52,3 +52,5 @@ localize(OUT, ROOT)
 
 import shutil
 shutil.copytree(ROOT.parent / "assets", OUT / "assets", dirs_exist_ok=True)
+from fingerprint import fingerprint
+fingerprint(OUT)
