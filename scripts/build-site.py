@@ -55,6 +55,17 @@ print('Built 12 XCTVRS pages and a 404 page; no records, accounts, signature cou
 from localize import localize
 localize(OUT, ROOT)
 
+# Keep future-group language generic until a real group exists.
+for html in OUT.rglob('*.html'):
+    text = html.read_text()
+    text = text.replace('Independent working groups', 'Working groups')
+    text = text.replace('Groups may form around a location, service issue, or regulatory activity when there is a real need. No Montreal or other regional group is being announced here.', 'A future working group may form around a service issue or regulatory activity when there is a real need. No regional group is established or announced here.')
+    text = text.replace('Groupes de travail indépendants', 'Groupes de travail')
+    text = text.replace('Des groupes pourraient se former autour d’un lieu, d’un enjeu de service ou d’une activité réglementaire lorsqu’un besoin réel existe. Aucun groupe montréalais ou régional n’est annoncé ici.', 'Un groupe de travail pourrait être créé autour d’un enjeu de service ou d’une activité réglementaire lorsqu’un besoin réel existe. Aucun groupe régional n’est établi ni annoncé ici.')
+    text = text.replace('Possible recipients for reviewed material are an independent ad hoc working group, the CRTC, or CASLI. Before any sharing, contributors should see the exact material, intended recipient, and identifying details that would be disclosed, and give specific consent.', 'No group or recipient is established or confirmed by this page. Any future sharing with a regulator, professional association, or community group would require review of the exact material, intended recipient, and identifying details before specific consent is requested.')
+    text = text.replace('Les destinataires envisagés pour le contenu examiné sont un groupe de travail ad hoc indépendant, le CRTC ou CASLI. Avant tout partage, les personnes participantes devraient pouvoir consulter le contenu exact, connaître le destinataire et les renseignements identificatoires qui seraient divulgués, puis donner leur consentement précis.', 'Aucun groupe ni destinataire n’est établi ou confirmé par cette page. Tout partage futur avec un organisme de réglementation, une association professionnelle ou un groupe communautaire nécessiterait l’examen du contenu exact, du destinataire et des renseignements identificatoires avant de demander un consentement précis.')
+    html.write_text(text)
+
 import shutil
 shutil.copytree(ROOT.parent / "assets", OUT / "assets", dirs_exist_ok=True)
 from fingerprint import fingerprint
