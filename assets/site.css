@@ -77,14 +77,14 @@ body[data-page=petition] main{grid-template-columns:150px minmax(0,1fr);column-g
 .question-grid{justify-content:center}
 /* Warm brick-red accents in dark mode, without changing the light palette. */
 @media(prefers-color-scheme:dark){
- html:not([data-theme=light]) body{--red:#b95642}
- html:not([data-theme=light]) .page-hero{background:#713329}
+ html:not([data-theme=light]) body[data-design=heritage]{--red:#b95642}
+ html:not([data-theme=light]) body[data-design=heritage] .page-hero{background:#713329}
  html:not([data-theme=light]) .button:not(.secondary),html:not([data-theme=light]) .question-number,html:not([data-theme=light]) .badge,html:not([data-theme=light]) .language-switch a[aria-current=true]{background:#914132;border-color:#b95642;color:#fff}
  html:not([data-theme=light]) .star-choice:has(input:checked) .star-icon,html:not([data-theme=light]) .star-choice:has(~ .star-choice input:checked) .star-icon{background:#c4684e}
  html:not([data-theme=light]) .rating-na input{accent-color:#a64c38}
  html:not([data-theme=light]) .card-animation-layer>.star-card:is(:hover,:focus-within,:has(input:checked)){background:#914132;border-color:#a95340;box-shadow:5px 12px 20px #8c3b251c}
 }
-html[data-theme=dark] body{--red:#b95642}
+html[data-theme=dark] body[data-design=heritage]{--red:#b95642}
 html[data-theme=dark] body[data-design=heritage] .page-hero{background:#713329}
 html[data-theme=dark] .button:not(.secondary),html[data-theme=dark] .question-number,html[data-theme=dark] .badge,html[data-theme=dark] .language-switch a[aria-current=true]{background:#914132;border-color:#b95642;color:#fff}
 html[data-theme=dark] .star-choice:has(input:checked) .star-icon,html[data-theme=dark] .star-choice:has(~ .star-choice input:checked) .star-icon{background:#c4684e}
