@@ -59,10 +59,12 @@ def localize(output, source_dir):
 
         def switcher(self):
             label = 'Langue' if self.language == 'fr' else 'Language'
-            return '<nav class="language-switch" aria-label="' + label + '">' + ''.join(
+            labels = ['Apparence', 'Clair', 'Sombre', 'Système'] if self.language == 'fr' else ['Appearance', 'Light', 'Dark', 'System']
+            control = '<label class="appearance-control"><span>' + labels[0] + '</span><select data-appearance>' + ''.join('<option value="' + value + '"' + (' selected' if value == 'system' else '') + '>' + name + '</option>' for value, name in zip(['light', 'dark', 'system'], labels[1:])) + '</select></label>'
+            return '<div class="appearance-controls">' + control + '<nav class="language-switch" aria-label="' + label + '">' + ''.join(
                 f'<a href="/{lang}{self.path}?lang={lang}" lang="{lang}" hreflang="{lang}-CA"' + (' aria-current="true"' if lang == self.language else '') + '>' + name + '</a>'
                 for lang, name in [('fr', 'Français'), ('en', 'English')]
-            ) + '</nav>'
+            ) + '</nav></div>'
 
         def handle_data(self, data):
             self.parts.append(escape(self.text(data), quote=False))
