@@ -73,3 +73,5 @@ body[data-page=petition] main{grid-template-columns:150px minmax(0,1fr);column-g
 @media(max-width:850px){.question-grid{grid-template-columns:minmax(0,280px)}}
 @media(max-width:700px){.question-grid{justify-content:center}.question-title{font-size:15px}.question-header{padding:9px 12px}.rating-fields{padding:0 14px 12px}.star-icon{width:26px;height:26px}}
 @media(prefers-reduced-motion:reduce){.card-animation-layer>.star-card{transition:none}}
+/* Center the narrow question-card rows beside the chapter navigation. */
+.question-grid{justify-content:center}
