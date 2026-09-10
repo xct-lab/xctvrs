@@ -90,3 +90,37 @@ html[data-theme=dark] .button:not(.secondary),html[data-theme=dark] .question-nu
 html[data-theme=dark] .star-choice:has(input:checked) .star-icon,html[data-theme=dark] .star-choice:has(~ .star-choice input:checked) .star-icon{background:#cc7052}
 html[data-theme=dark] .rating-na input{accent-color:#af553d}
 html[data-theme=dark] .card-animation-layer>.star-card:is(:hover,:focus-within,:has(input:checked)){background:#9c4936;border-color:#b45d45;box-shadow:5px 12px 20px #8c3b251c}
+/* background-animate: decorative tile grid and shine, scoped to petition cards. */
+.question-grid .card-surface{isolation:isolate}
+.question-grid .card-surface>.question-header,.question-grid .card-surface>.question-title,.question-grid .card-surface>.rating-fields{position:relative;z-index:2}
+.background-animate{position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit;overflow:hidden;--tile-tint:color-mix(in srgb,var(--red) 12%,transparent)}
+.background-animate .shine{position:absolute;inset:0;opacity:0;transition:opacity .5s;background:radial-gradient(ellipse at 60% 0%,var(--tile-tint),transparent 65%)}
+.background-animate .background{position:absolute;inset:0;mask-image:radial-gradient(circle at 60% 5%,#000 0%,#000 15%,transparent 65%);-webkit-mask-image:radial-gradient(circle at 60% 5%,#000 0%,#000 15%,transparent 65%)}
+.background-animate .tiles{opacity:0;transition:opacity .25s}
+.background-animate .tile{position:absolute;background:var(--tile-tint);opacity:0;animation-duration:8s;animation-iteration-count:infinite}
+.background-animate .tile-4,.background-animate .tile-6,.background-animate .tile-10{animation-delay:-2s}
+.background-animate .tile-3,.background-animate .tile-5,.background-animate .tile-8{animation-delay:-4s}
+.background-animate .tile-2,.background-animate .tile-9{animation-delay:-6s}
+.background-animate .tile-1{top:0;left:0;height:10%;width:22.5%}
+.background-animate .tile-2{top:0;left:22.5%;height:10%;width:27.5%}
+.background-animate .tile-3{top:0;left:50%;height:10%;width:27.5%}
+.background-animate .tile-4{top:0;left:77.5%;height:10%;width:22.5%}
+.background-animate .tile-5{top:10%;left:0;height:22.5%;width:22.5%}
+.background-animate .tile-6{top:10%;left:22.5%;height:22.5%;width:27.5%}
+.background-animate .tile-7{top:10%;left:50%;height:22.5%;width:27.5%}
+.background-animate .tile-8{top:10%;left:77.5%;height:22.5%;width:22.5%}
+.background-animate .tile-9{top:32.5%;left:50%;height:22.5%;width:27.5%}
+.background-animate .tile-10{top:32.5%;left:77.5%;height:22.5%;width:22.5%}
+.background-animate .line{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.background-animate .line:before,.background-animate .line:after{content:'';position:absolute;background:var(--line);transition:transform .35s;transition-delay:var(--line-delay,0s)}
+.background-animate .line:before{left:0;right:0;height:1px;transform-origin:0 50%;transform:scaleX(0)}
+.background-animate .line:after{top:0;bottom:0;width:1px;transform-origin:50% 0;transform:scaleY(0)}
+.background-animate .line-1{--line-delay:0s}.background-animate .line-1:before{top:10%}.background-animate .line-1:after{left:22.5%}
+.background-animate .line-2{--line-delay:.15s}.background-animate .line-2:before{top:32.5%}.background-animate .line-2:after{left:50%}
+.background-animate .line-3{--line-delay:.3s}.background-animate .line-3:before{top:55%}.background-animate .line-3:after{right:22.5%}
+.question-grid .star-card:is(:hover,:focus-within) .background-animate :is(.shine,.tiles,.line){opacity:1}
+.question-grid .star-card:is(:hover,:focus-within) .background-animate .line:before{transform:scaleX(1)}
+.question-grid .star-card:is(:hover,:focus-within) .background-animate .line:after{transform:scaleY(1)}
+@keyframes petition-background-tile{0%,12.5%,100%{opacity:1}25%,82.5%{opacity:0}}
+@media(prefers-reduced-motion:no-preference){.question-grid .star-card:is(:hover,:focus-within) .background-animate .tile{animation-name:petition-background-tile}}
+@media(prefers-reduced-motion:reduce){.background-animate *,.background-animate *:before,.background-animate *:after{transition:none!important;animation:none!important}.background-animate .tile{opacity:.5}}
