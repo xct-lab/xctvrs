@@ -124,3 +124,19 @@ html[data-theme=dark] .card-animation-layer>.star-card:is(:hover,:focus-within,:
 @keyframes petition-background-tile{0%,12.5%,100%{opacity:1}25%,82.5%{opacity:0}}
 @media(prefers-reduced-motion:no-preference){.question-grid .star-card:is(:hover,:focus-within) .background-animate .tile{animation-name:petition-background-tile}}
 @media(prefers-reduced-motion:reduce){.background-animate *,.background-animate *:before,.background-animate *:after{transition:none!important;animation:none!important}.background-animate .tile{opacity:.5}}
+/* Petition hero: background-animate with maple leaves in place of tiles. */
+body[data-page=petition] .page-hero{position:relative;isolation:isolate;overflow:hidden}
+body[data-page=petition] .page-hero>:not(.background-animate){position:relative;z-index:1}
+.page-hero>.background-animate{--tile-tint:#fff;--line:#ffffff25}
+.page-hero>.background-animate .background{mask-image:linear-gradient(90deg,transparent 15%,#000 80%);-webkit-mask-image:linear-gradient(90deg,transparent 15%,#000 80%)}
+.page-hero>.background-animate .shine{opacity:.1;background:radial-gradient(ellipse at 85% 15%,#ffe0ac,transparent 65%)}
+.page-hero>.background-animate .tiles{opacity:.12}
+.page-hero>.background-animate .tile{width:clamp(32px,6vw,80px);height:auto;aspect-ratio:64/70;opacity:.6;clip-path:polygon(47% 94%,48% 69%,20% 73%,25% 60%,6% 44%,19% 41%,16% 24%,36% 37%,33% 14%,44% 20%,50% 3%,58% 20%,69% 14%,64% 37%,84% 24%,81% 41%,94% 44%,75% 60%,80% 73%,52% 69%,53% 94%)}
+.page-hero>.background-animate .tile:nth-child(n+5){margin-top:35px}
+.page-hero>.background-animate .tile:nth-child(n+9){margin-top:70px}
+.page-hero:hover>.background-animate .shine{opacity:.2}
+.page-hero:hover>.background-animate .tiles{opacity:.2}
+.page-hero:hover>.background-animate .line{opacity:1}
+.page-hero:hover>.background-animate .line:before{transform:scaleX(1)}
+.page-hero:hover>.background-animate .line:after{transform:scaleY(1)}
+@media(prefers-reduced-motion:no-preference){.page-hero:hover>.background-animate .tile{animation-name:petition-background-tile}}
