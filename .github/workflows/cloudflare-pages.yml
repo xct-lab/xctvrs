@@ -27,16 +27,13 @@ jobs:
         run: |
           test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::Add CLOUDFLARE_ACCOUNT_ID in repository Actions secrets."; exit 1; }
           test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::Add CLOUDFLARE_API_TOKEN in repository Actions secrets."; exit 1; }
-      - name: Prepare website files
-        run: |
-          mkdir -p "$RUNNER_TEMP/xctvrs-site"
-          cp index.html "$RUNNER_TEMP/xctvrs-site/"
-          cp -R petition resources "$RUNNER_TEMP/xctvrs-site/"
+      - name: Build approved public website
+        run: python3 scripts/build-site.py
       - name: Deploy existing Pages project
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: '4.130.0'
-          command: pages deploy ${{ runner.temp }}/xctvrs-site --project-name xctvrs --branch main
+          command: pages deploy dist --project-name xctvrs --branch main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
